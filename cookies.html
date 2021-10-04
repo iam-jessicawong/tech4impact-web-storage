@@ -13,18 +13,21 @@
   }
 </style>
 <body onload="checkCookie()">
-  <form action="post" id="login">
+  <form action="" method="POST" id="login">
     <label for="username">Username</label><input type="text" name="username" id="username">
     <label for="pass">Password</label><input type="password" name="pass" id="pass">
     <button type="submit" id="submitbtn">Login</button>
   </form>
-  <p id="username" class="d-none"></p>
-  <p id="password" class="d-none"></p>
 
+  <h1 id="afterLogin" class="d-none">Selamat Datang</h1>
+  <button id="logout" class="d-none">Logout</button>
+  
   <script>
     const unameElement = document.getElementById("username")
-    const passElement = document.getElementById("password")
+    const passElement = document.getElementById("pass")
     const loginFormElement = document.getElementById("login")
+    const h1 = document.getElementById("afterLogin")
+    const logout = document.getElementById("logout")
 
     const setCookies = (cname, cvalue) => {
       const d = new Date();
@@ -48,11 +51,19 @@
       return "";
     }
 
+    const deleteCookie = () => {
+      document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "pass=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
     function checkCookie() {
       let user = getCookie("username");
       if (user != "") {
         loginFormElement.classList.add("d-none")
         alert("Anda sudah login");
+        h1.classList.remove("d-none")
+        h1.textContent += ` ${user}`
+        logout.classList.remove("d-none")
       }
     }
 
@@ -65,6 +76,11 @@
         setCookies('username', username)
         setCookies('pass', pass)
       }
+    })
+
+    logout.addEventListener('click', () => {
+      deleteCookie()
+      window.location.reload();
     })
   </script>
 </body>
