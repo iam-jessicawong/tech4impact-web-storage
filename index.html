@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="setLocalStorage('name', 'jesi')" type="button">Simpan Local Storage</button>
+  <button onclick="getLocalStorage('name')" type="button">Ambil Local Storage</button>
+  <button onclick="removeLocalStorage('name')" type="button">Hapus Local Storage</button>
+  <button onclick="updateLocalStorage('name', 'wong')" type="button">Update Local Storage</button>
+  <br>
+  <p id="result"></p>
+<div id="result"></div>
+
+  <script>
+    const setLocalStorage = (key, value) => {
+      localStorage.setItem(key, value)
+    }
+
+    const getLocalStorage = (key) => {
+      let value = localStorage.getItem(key)
+      document.getElementById("result").innerHTML = value
+    }
+
+    const removeLocalStorage = (key) => {
+      localStorage.removeItem(key)
+    }
+
+    const updateLocalStorage = (key, value) => {
+      localStorage.setItem(key, value)
+    }
+  </script>
+</body>
+</html>

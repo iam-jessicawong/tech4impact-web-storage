@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="post" id="add">
+    <label for="num">Input Number</label>
+    <input type="number" name="num" id="num">
+    <button type="submit" id="addBtn">Add</button>
+  </form>
+  <p id="totalNum"></p>
+
+  <script>
+    const formEl = document.getElementById("add")
+    const numEl = document.getElementById("num")
+    const pElement = document.getElementById("totalNum")
+
+    
+    const setSessionData = (num) => {
+      if (sessionStorage.numCount) {
+        sessionStorage.numCount = Number(sessionStorage.numCount)+Number(num);
+      } else {
+        sessionStorage.numCount = Number(num);
+      }
+    }
+    
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault()
+      
+      num = numEl.value
+      
+      if(num) {
+        setSessionData(num)
+        formEl.reset()
+      }
+      
+      let totalNum = sessionStorage.getItem("numCount")
+      if(totalNum) {
+        pElement.textContent = totalNum
+      }
+    })
+  </script>
+</body>
+</html>
